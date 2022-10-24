@@ -4,15 +4,20 @@ let masterPlay = document.getElementById("master-play");
 let progressBar = document.getElementById("progress-bar");
 let vol = document.getElementById("volume");
 let songIndex = 0;
+let colorArr = [[255, 88, 58],[255, 144, 50],[254, 221, 15],[75, 150, 62],[35, 67, 159],[86, 20, 117]];
+let colorState=0;
+let playState=false;
 //master play and pause
 masterPlay.addEventListener('click',()=>{
   if(audio.paused || audio.duration<=0){
     audio.play();
+    disco("play");
     masterPlay.src="./images/pause.png";
     stateToggle(songIndex,"pause","master");
   }
   else{
     audio.pause();
+    disco("pause");
     masterPlay.src="./images/play.png";
     stateToggle(songIndex,"play","master");
   }
@@ -53,11 +58,13 @@ Array.from(document.getElementsByClassName("card")).forEach((element)=>{
       }
       if(audio.paused ){
         audio.play();
+        disco("play");
         customPlay.src="./images/pause-g.png";
         masterPlay.src="./images/pause.png";
       }else
       {
         audio.pause();
+        disco("pause");
         customPlay.src="./images/play-g.png";
         masterPlay.src="./images/play.png";
       }
@@ -81,6 +88,7 @@ function prevFunction(){
   songIndex=(songIndex==0)?7:(songIndex-1);
   audio.src=`./songs/${songIndex}.mp3`;
   audio.play();
+  disco("play");
   stateToggle(songIndex,"pause","prev");
 }
 function nextFunction(){
@@ -88,6 +96,7 @@ function nextFunction(){
   songIndex=(songIndex==7)?0:(songIndex+1);
   audio.src=`./songs/${songIndex}.mp3`;
   audio.play();
+  disco("play");
   stateToggle(songIndex,"pause","next");
 }
 // stateToggle function()
@@ -104,4 +113,17 @@ function stateToggle(id,state,location){
   let statusBarText = document.getElementById("status-bar-text");
   let cardText = currId.getElementsByClassName("card-text")[0];
   statusBarText.innerHTML=cardText.innerHTML;
+}
+//Disco lighting
+function disco(playState){
+
+  var interval=setInterval(()=>{
+    let element = document.getElementsByClassName("song-container")[0];
+    let r = colorArr[colorState][0];
+    let g = colorArr[colorState][1];
+    let b = colorArr[colorState][2];
+    clearInterval(interval);
+    element.style.backgroundImage=`linear-gradient(rgba(${r},${g},${b},0.8) -8%, rgb(18, 18, 18) 70%)`;
+    colorState=(colorState+1)%6;
+  },1000);
 }
