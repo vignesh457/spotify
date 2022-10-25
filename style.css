@@ -231,7 +231,7 @@ hr{
   height: 20px;
   transition: 0.1s linear;
 }
-.play-bar-top img:nth-child(odd):hover{
+.play-bar-top img:nth-child(even):hover{
   height: 23px;
 }
 .play-bar-bottom{
