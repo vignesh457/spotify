@@ -74,7 +74,6 @@ hr{
   width: 82vw;
   height: 100%;
   background-image: linear-gradient(rgba(75, 150, 62, 0.8) -8%, rgb(18, 18, 18) 70%);
-  transition: background-image 3s ease-in;
   overflow: scroll;
 }
 .song-container::-webkit-scrollbar {
@@ -199,17 +198,36 @@ hr{
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+#currTime{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-family: 'Gothic A1', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: grey;
+}
+#totalTime{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: 'Gothic A1', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: grey;
 }
 .play-bar-top img{
-  height: 35px;
-  margin: 15px;
+  height: 33px;
+  margin: 15px 12px 3px 12px;
   cursor: pointer;
   transition: 0.1s linear;
 }
 .play-bar-top img:hover{
   height: 38px;
 }
-.play-bar-top img:nth-child(odd){
+.play-bar-top img:nth-child(even){
   height: 20px;
   transition: 0.1s linear;
 }
@@ -225,7 +243,7 @@ hr{
 }
 .play-bar-bottom .slider{
   width: 100%;
-  height: 5px;
+  height: 4.5px;
   outline: none;
   border-radius: 10px;
   cursor: pointer;
@@ -296,6 +314,15 @@ hr{
   }
   hr{
     display: none;
+  }
+  .play-bar-bottom .slider{
+    width: 95%;
+  }
+  #currTime{
+    left: 2.5%;
+  }
+  #totalTime{
+    right: 2.5%;
   }
 }
 @media screen and (max-width:470px) {
