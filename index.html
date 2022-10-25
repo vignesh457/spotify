@@ -20,7 +20,7 @@
       <div class="nav-bar">
         <ul>
           <li><img src="./images/search.png" alt="search">Search</li>
-          <li><img src="./images/heart.png" alt="fav">Favourites</li>
+          <li id="favTab"><img src="./images/heart.png" alt="fav">Favourites</li>
         </ul>
       </div>
       <hr>
@@ -129,9 +129,11 @@
     </div>
     <div class="play-bar">
       <div class="play-bar-top">
-        <img id="previous" src="./images/prev.png" alt="prev">
+        <h3 id="currTime">00:00</h3>
+        <img id="previous" src="./images/previous.png" alt="prev">
         <img id="master-play" src="./images/play.png" alt="play">
         <img id="next" src="./images/next.png" alt="next">
+        <h3 id="totalTime">5:14</h3>
       </div>
       <div class="play-bar-bottom">
         <input id="progress-bar" type="range" min="0" max="100" value="0" class="slider">
