@@ -36,7 +36,8 @@ input[type="text"]{
   margin-top: 75px;
   color: #282828;
   font-family: 'Gothic A1', sans-serif;
-  background: rgb(255 255 255 / 68%);
+  /* background: rgb(255 255 255 / 68%); */
+  background: rgb(75 150 62 / 80%);
 }
 #ok{
   width: 48px;
