@@ -387,6 +387,9 @@ hr{
   input[type="text"] {
     font-size: 15px;
   }
+  form {
+    width: 50%;
+  }
   #ok{
     width: 40px;
     margin-left: 0px;
