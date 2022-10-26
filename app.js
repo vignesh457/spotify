@@ -163,7 +163,10 @@ function disco() {
 }
 //favTab
 document.getElementById("favTab").addEventListener('click',()=>{
-  alert("You are already in the Favourites page...\n🙂Enjoy the music...");
+  if(document.getElementById("favTab").classList.contains("currTab"))
+    alert("You are already in the Favourites page...\n🙂Enjoy the music...");
+  else
+    location.reload();
 });
 //Search Tab
 document.getElementById("searchTab").addEventListener('click',searchBarMain);
