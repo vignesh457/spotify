@@ -385,14 +385,15 @@ hr{
 }
 @media screen and (max-width:470px) {
   input[type="text"] {
-    font-size: 15px;
+    font-size: 19px;
     width: 100%;
+    padding: 12px 30px
   }
   form {
-    width: 50%;
+    width: 65%;
   }
   #ok{
-    width: 40px;
+    width: 50px;
     margin-left: 0px;
   }
   .card{
