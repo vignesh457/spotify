@@ -11,6 +11,11 @@
 </head>
 
 <body>
+  <img id="backBtn" src="./images/back.png" alt="back"/>
+  <div class="blur">
+    <form id="myForm"><input id="myInput" type="text" placeholder="Which Song..."></form>
+    <img id="ok" src="./images/search-dark.webp" alt="search-dark" />
+  </div>
   <div class="top-section">
     <div class="menu-container">
       <div class="logo">
@@ -19,15 +24,15 @@
       </div>
       <div class="nav-bar">
         <ul>
-          <li><img src="./images/search.png" alt="search">Search</li>
-          <li id="favTab"><img src="./images/heart.png" alt="fav">Favourites</li>
+          <li id="searchTab"><img src="./images/search.png" alt="search">Search</li>
+          <li id="favTab" class="currTab"><img src="./images/heart.png" alt="fav">Favourites</li>
         </ul>
       </div>
       <hr>
     </div>
     <div class="song-container">
       <div class="song-header">
-        <h1>Favourite Songs</h1>
+        <h1 id="mainHeader">Favourite Songs</h1>
       </div>
       <div class="song-body">
     <!--          -->
