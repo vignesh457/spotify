@@ -27,7 +27,14 @@ masterPlay.addEventListener('click',()=>{
 audio.addEventListener('timeupdate',()=>{
   progressBar.value=(audio.currentTime/audio.duration)*100;
   if(progressBar.value==100){
-    nextFunction();
+    if(document.getElementById("favTab").classList.contains("currTab"))
+      nextFunction();
+    else{
+      audio.pause();
+      stopDisco();
+      masterPlay.src="./images/play.png";
+      stateToggle(songIndex,"play","master");
+    }
   }
 });
 progressBar.addEventListener('change',()=>{
@@ -156,5 +163,82 @@ function disco() {
 }
 //favTab
 document.getElementById("favTab").addEventListener('click',()=>{
-  alert("You are already in the Favourites page\nHappy Listening...");
+  alert("You are already in the Favourites page...\n🙂Enjoy the music...");
+});
+//Search Tab
+document.getElementById("searchTab").addEventListener('click',searchBarMain);
+async function searchBarMain(){
+  audio.pause();stopDisco();
+  masterPlay.src="./images/play.png";
+  stateToggle(songIndex,"play","master");
+  document.getElementsByClassName("blur")[0].style.zIndex="1";
+  document.getElementById("backBtn").style.display="inline";
+  let text = await searchText();
+  hideCards(text);
+}
+//Listening the search Text
+function searchText(){
+  return new Promise((resolve, reject)=>{
+    document.getElementById('ok').addEventListener('click',()=>{
+      let val = document.getElementById("myForm").elements[0].value;
+      resolve(val.toLowerCase());
+    });
+  });
+}
+//hiding cards
+function hideCards(mySongName){
+  let flag=false;
+  let result="NONE";
+  Array.from(document.getElementsByClassName("card")).forEach((element)=>{
+    let currSongName=element.getElementsByTagName('h2')[0].innerHTML.toLowerCase();
+    if(currSongName!=mySongName){
+      element.style.display="none";
+    }
+    else{
+      //setting song index
+      songIndex=Number.parseInt(element.getAttribute("id"));
+      audio.src=`./songs/${songIndex}.mp3`;
+      //status post
+      let statusPoster = document.getElementById("status-poster");
+      let poster = element.getElementsByClassName("poster")[0];
+      statusPoster.src=poster.src;
+      //status text
+      let statusBarText = document.getElementById("status-bar-text");
+      let cardText = element.getElementsByClassName("card-text")[0];
+      statusBarText.innerHTML=cardText.innerHTML;
+      element.style.display="flex";
+      flag=true;
+      result=element.getElementsByTagName('h2')[0].innerHTML;
+    }
+  });
+  if(flag){
+    document.getElementsByClassName("blur")[0].style.zIndex="-1";
+    document.getElementById("previous").style.zIndex="-1";
+    document.getElementById("next").style.zIndex="-1";
+    document.getElementById("favTab").classList.remove("currTab");
+    document.getElementById("searchTab").classList.add("currTab");
+  }
+  else{
+    alert("Song not found!");
+    unHideCards();
+    searchBarMain();
+  }
+  console.log(result);
+  if(result!="NONE")
+    document.getElementById("mainHeader").innerHTML=`Enjoy Listening "${result}" Song...`////////////////////////////////////
+}
+//uncHideCards Function
+function unHideCards(){
+  Array.from(document.getElementsByClassName("card")).forEach(element=>element.style.display="flex");
+}
+// on clicking back button
+document.getElementById("backBtn").addEventListener('click',()=>{
+  location.reload();
+})
+//key board EventListener
+document.getElementById("myInput").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById('ok').click();
+  }
 });
